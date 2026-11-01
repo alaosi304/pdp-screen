@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="slide-version" content="2026-11-01-10">
+<meta name="slide-version" content="2026-11-01-11">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>آراء المتدربين — دورة حماية البيانات الشخصية</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,9 +35,9 @@ body.idle{cursor:none}
 
 .vp{position:fixed;top:0;right:0;bottom:0;left:0;direction:ltr;overflow:hidden;background:radial-gradient(120% 90% at 70% 10%,var(--bgA) 0%,var(--bgB) 60%,var(--bgC) 100%)}
 .glow{position:absolute;border-radius:50%}
-.g1{width:80vw;height:80vw;left:-30vw;top:-36vw;opacity:calc(.7*var(--gOp));background:radial-gradient(circle,var(--g1) 0%,rgba(0,0,0,0) 66%);animation:d1 28s ease-in-out infinite alternate}
-.g2{width:70vw;height:70vw;right:-26vw;bottom:-32vw;opacity:calc(.55*var(--gOp));background:radial-gradient(circle,var(--g2) 0%,rgba(0,0,0,0) 66%);animation:d2 34s ease-in-out infinite alternate}
-.g3{width:46vw;height:46vw;left:30vw;top:20vh;opacity:calc(.3*var(--gOp));background:radial-gradient(circle,var(--g3) 0%,rgba(0,0,0,0) 66%);animation:d3 24s ease-in-out infinite alternate}
+.g1{width:80vw;height:80vw;left:-30vw;top:-36vw;opacity:calc(.7*var(--gOp));background:radial-gradient(circle,var(--g1) 0%,rgba(0,0,0,0) 66%)}
+.g2{width:70vw;height:70vw;right:-26vw;bottom:-32vw;opacity:calc(.55*var(--gOp));background:radial-gradient(circle,var(--g2) 0%,rgba(0,0,0,0) 66%)}
+.g3{width:46vw;height:46vw;left:30vw;top:20vh;opacity:calc(.3*var(--gOp));background:radial-gradient(circle,var(--g3) 0%,rgba(0,0,0,0) 66%)}
 @keyframes d1{to{transform:translate(12vw,10vh)}}
 @keyframes d2{to{transform:translate(-10vw,-8vh)}}
 @keyframes d3{to{transform:translate(-16vw,12vh)}}
@@ -60,40 +60,40 @@ canvas#sky{position:absolute;top:0;left:0;width:100%;height:100%}
 .tag .ln{width:0;height:2px;background:var(--spot);margin-left:14px;animation:grow 1.2s cubic-bezier(.7,0,.2,1) .8s forwards}
 @keyframes grow{to{width:48px}}
 .deptL{font-size:36px;font-weight:700;color:#fff;padding:14px 34px;border-radius:20px;
-  background:linear-gradient(135deg,var(--deptA),var(--deptB));box-shadow:0 12px 36px rgba(29,79,176,.28),inset 0 0 0 1px rgba(255,255,255,.18);animation:dp 4s ease-in-out infinite}
+  background:linear-gradient(135deg,var(--deptA),var(--deptB));box-shadow:0 12px 36px rgba(29,79,176,.28),inset 0 0 0 1px rgba(255,255,255,.18)}
 @keyframes dp{50%{box-shadow:0 12px 50px rgba(27,143,108,.4),inset 0 0 0 1px rgba(255,255,255,.25)}}
 
 /* cards */
 .slot{position:absolute;opacity:0;animation:rise 1s cubic-bezier(.16,1,.3,1) forwards}
 @keyframes rise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
-.fl{width:100%;height:100%;animation:flo 7s ease-in-out infinite alternate}
+.fl{width:100%;height:100%}
 @keyframes flo{from{transform:translateY(-4px)}to{transform:translateY(5px)}}
 .card{position:relative;width:100%;height:100%;border-radius:26px;padding:28px 32px 24px;overflow:hidden;display:flex;flex-direction:column;
   background:linear-gradient(160deg,var(--cardHi),rgba(255,255,255,0));background-color:var(--card);
-  border:1px solid var(--cardBd);box-shadow:0 20px 60px var(--shadow);
-  transition:transform .9s cubic-bezier(.2,.7,.2,1),opacity .9s,border-color .9s,box-shadow .9s}
+  border:1px solid var(--cardBd);box-shadow:0 10px 28px var(--shadow);
+  transition:opacity .6s,border-color .6s}
 .dim .card{opacity:.82}
-.on .card{transform:scale(1.03);border-color:var(--spotBd);box-shadow:0 26px 80px var(--shadow),0 0 0 1px var(--spotBd),0 0 60px var(--spotGlow)}
-.qm{width:40px;height:32px;flex:none;opacity:.9;margin-bottom:12px;transition:transform .9s}
-.qm path{fill:var(--qm);transition:fill .9s}
+.on .card{border-color:var(--spotBd);border-width:2px}
+.qm{width:40px;height:32px;flex:none;opacity:.9;margin-bottom:12px}
+.qm path{fill:var(--qm)}
 .on .qm path{fill:var(--spot)}
-.on .qm{transform:scale(1.15)}
+
 .txt{flex:1;font-size:19px;line-height:1.76;color:var(--txt)}
 .short .card{justify-content:center;align-items:center;text-align:center;padding:46px 24px 18px}
 .short .txt{flex:none;font-size:22px;line-height:1.5;font-weight:600;color:var(--strong)}
 .short .qm{position:absolute;top:18px;right:22px;margin:0;width:32px;height:26px}
-.w{display:inline-block;opacity:0;transform:translateY(14px);animation:win .6s cubic-bezier(.16,1,.3,1) forwards}
+.w{display:inline}
 @keyframes win{to{opacity:1;transform:none}}
-.hl{color:var(--strong);font-weight:600;transition:color .6s}
+.hl{color:var(--strong);font-weight:600}
 .on .hl{color:var(--spotTxt)}
 .by{display:flex;align-items:center;font-size:18px;font-weight:600;padding-top:14px;margin-top:12px;border-top:1px solid var(--cardBd);color:var(--strong)}
 .short .by{border:0;padding-top:4px;margin-top:10px}
-.by .ln{width:26px;height:2px;background:var(--accent);margin-left:12px;transition:width .8s,background .8s}
-.on .by .ln{width:52px;background:var(--spot)}
+.by .ln{width:26px;height:2px;background:var(--accent);margin-left:12px}
+.on .by .ln{background:var(--spot)}
 .bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--grid)}
 .bar i{display:block;height:100%;width:100%;background:var(--spot);transform-origin:right;transform:scaleX(0)}
 .shine{position:absolute;top:0;bottom:0;width:160px;left:100%;background:linear-gradient(90deg,rgba(255,255,255,0),var(--spotGlow),rgba(255,255,255,0));pointer-events:none}
-.on .shine{animation:sh 1.8s cubic-bezier(.4,0,.2,1) .2s}
+.shine{display:none}
 @keyframes sh{from{transform:translateX(0)}to{transform:translateX(-900px)}}
 
 .hint{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);direction:rtl;font-size:13px;color:var(--txt);
@@ -117,7 +117,6 @@ body.idle .hint{opacity:0}
 <div class="vp" id="vp">
   <div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
   <div class="grid"></div>
-  <canvas id="sky"></canvas>
   <div class="vign"></div>
   <div class="stage" id="stage">
     <header class="top">
@@ -199,17 +198,6 @@ for(var i=0;i<DATA.length;i++){var d=DATA[i],delay=300+i*180;
    '<div class="by"><span class="ln"></span>'+d.n+'</div><div class="bar"><i></i></div><div class="shine"></div></div></div></div>';}
 $("cards").innerHTML=html;
 
-/* stars (light) */
-(function(){var cv=$("sky");if(!cv.getContext)return;var cx=cv.getContext("2d"),W,H,S=[];
-  function rs(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;S=[];
-    for(var i=0;i<90;i++)S.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.3+.3,v:Math.random()*.15+.05,a:Math.random()});}
-  rs();window.addEventListener("resize",rs);
-  var raf=window.requestAnimationFrame||window.webkitRequestAnimationFrame||function(f){return setTimeout(f,33);};
-  function f(){cx.clearRect(0,0,W,H);
-    for(var i=0;i<S.length;i++){var s=S[i];s.y-=s.v;s.a+=.01;if(s.y<-4){s.y=H+4;s.x=Math.random()*W;}
-      var lt=(" "+document.documentElement.className+" ").indexOf(" light ")>-1;cx.fillStyle=(lt?"rgba(40,90,170,":"rgba(190,225,255,")+((lt?.18:.35)+(lt?.18:.35)*Math.sin(s.a))+")";cx.beginPath();cx.arc(s.x,s.y,s.r,0,7);cx.fill();}
-    raf(f);}
-  f();})();
 
 /* spotlight cycle */
 var step=-1,reloadPending=false,startedAt=new Date().getTime();
