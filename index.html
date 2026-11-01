@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="slide-version" content="2026-11-01-6">
+<meta name="slide-version" content="2026-11-01-7">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>آراء المتدربين — دورة حماية البيانات الشخصية</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,9 +63,9 @@ canvas#sky{position:absolute;top:0;left:0;width:100%;height:100%}
 .qm{width:40px;height:32px;flex:none;opacity:.85;margin-bottom:12px;transition:transform .9s}
 .on .qm{transform:scale(1.15)}
 .txt{flex:1;font-size:20px;line-height:1.78;color:#e6edf9}
-.short .card{justify-content:center;align-items:center;text-align:center;padding:22px 96px}
-.short .txt{flex:none;font-size:31px;line-height:1.5;font-weight:600;color:#fff}
-.short .qm{position:absolute;top:24px;right:30px;margin:0;width:46px;height:37px}
+.short .card{justify-content:center;align-items:center;text-align:center;padding:20px 74px 18px 34px}
+.short .txt{flex:none;font-size:25px;line-height:1.5;font-weight:600;color:#fff}
+.short .qm{position:absolute;top:22px;right:24px;margin:0;width:36px;height:29px}
 .w{display:inline-block;opacity:0;transform:translateY(14px);animation:win .6s cubic-bezier(.16,1,.3,1) forwards}
 @keyframes win{to{opacity:1;transform:none}}
 .hl{color:#fff;font-weight:600;transition:color .6s}
@@ -115,18 +115,20 @@ if(/debug/.test(location.search)){setTimeout(function(){errs.push("debug");showE
 
 /* [نص] = عبارة تضيء بالذهبي عند التركيز على البطاقة */
 var DATA=[
- {n:"أمل قاسم إسماعيل دراج",x:1062,y:150,w:474,h:504,
+ {n:"أمل قاسم إسماعيل دراج",x:1062,y:150,w:474,h:494,
   t:"بصراحة من [أمتع الدورات والحقائب التدريبية الإلكترونية] التي تعلمت عليها في حياتي: [وضوح في السردية وطريقة التعلم]، و[تنوع في التطبيقات والأمثلة الواقعية]. مع طول مدة الدورة إلا أنها [متميزة ورائعة]، ولا يمكن أن أصفها بغير هذا الوصف. شكرًا سدايا، لقد أوضحتم لنا ما لم يوضحه النظام ولا اللائحة ولا الدليل الاسترشادي، لكنكم [أبدعتم في هذه الحقيبة]. شكرًا لكم على هذه الاحترافية، شكرًا أكاديمية سدايا."},
- {n:"رائد عبدالرحمن عبدالكريم الديحان",x:563,y:150,w:474,h:504,
+ {n:"رائد عبدالرحمن عبدالكريم الديحان",x:563,y:150,w:474,h:494,
   t:"كان محتوى جيدًا، وأعجبني جدًا أسلوب تقديم الورشة من حيث التنوع في الأساليب مثل [المقاطع المرئية المتفاعلة]، وتنوع أساليب الأنشطة مثل [البطاقات والسيناريوهات التفاعلية]، والتي بدورها [كسرت حاجز الملل] لو كان التقديم كله مقاطع مرئية. [أفكار رائعة وأساليب متنوعة]، مع الشكر والتقدير لكم على توفير هذه الورش في مجال حماية البيانات الشخصية وحوكمة البيانات، وسعيد بتمكني من الاستفادة منها."},
- {n:"جود حمود القرعاني",x:64,y:150,w:474,h:504,
+ {n:"جود حمود القرعاني",x:64,y:150,w:474,h:494,
   t:"أحد أهم محركات النجاح التقني هو [الامتثال لحوكمة البيانات وحماية خصوصيتها]. سعدت بإتمام دورة حماية البيانات الشخصية (PDPL) المقدمة من سدايا: [فهم الأطر التنظيمية لنظام حماية البيانات الشخصية]، و[التمييز العملي بين أدوار جهة التحكم وجهة المعالجة]. خطوة جديدة ومعرفة أعمق تسهم في [تعزيز الأمان والامتثال الرقمي]."},
- {n:"محمد بن عمر بن محمد مجلي",x:812,y:678,w:724,h:176,s:1,
+ {n:"محمد بن عمر بن محمد مجلي",x:1062,y:668,w:474,h:188,s:1,
   t:"دورة تدريبية [فاخرة] و[نقلة معرفية نوعية]. شكرًا لجهودكم."},
- {n:"محمد عبدالله سليمان الحماد",x:64,y:678,w:724,h:176,s:1,
+ {n:"سلطان محمد حامد القرافي",x:563,y:668,w:474,h:188,s:1,
+  t:"تجربة المحتوى [جميلة جدًا]، وأتمنى أن تكون هناك [مواد تدريبية لجميع مجالات البيانات الـ14]."},
+ {n:"محمد عبدالله سليمان الحماد",x:64,y:668,w:474,h:188,s:1,
   t:"جزاكم الله خيرًا، دورة [أكثر من رائعة]."}
 ];
-var ORDER=[3,0,4,1,2]; /* spotlight order: short, long, short, long, long */
+var ORDER=[3,0,4,1,5,2]; /* spotlight order alternates short and long */
 function $(id){return document.getElementById(id);}
 function addC(el,c){if(el&&(" "+el.className+" ").indexOf(" "+c+" ")<0)el.className+=" "+c;}
 function remC(el,c){if(el)el.className=(" "+el.className+" ").replace(new RegExp(" "+c+" ","g")," ").replace(/^\s+|\s+$/g,"");}
