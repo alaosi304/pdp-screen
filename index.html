@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="slide-version" content="2026-11-01-11">
+<meta name="slide-version" content="2026-11-01-12">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>آراء المتدربين — دورة حماية البيانات الشخصية</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -79,15 +79,16 @@ canvas#sky{position:absolute;top:0;left:0;width:100%;height:100%}
 .on .qm path{fill:var(--spot)}
 
 .txt{flex:1;font-size:19px;line-height:1.76;color:var(--txt)}
-.short .card{justify-content:center;align-items:center;text-align:center;padding:46px 24px 18px}
-.short .txt{flex:none;font-size:22px;line-height:1.5;font-weight:600;color:var(--strong)}
-.short .qm{position:absolute;top:18px;right:22px;margin:0;width:32px;height:26px}
+.short .card{justify-content:center;align-items:center;text-align:center;padding:48px 18px 16px}
+.short .txt{flex:none;font-size:20px;line-height:1.5;font-weight:600;color:var(--strong)}
+.short .qm{position:absolute;top:18px;right:20px;margin:0;width:30px;height:24px}
 .w{display:inline}
 @keyframes win{to{opacity:1;transform:none}}
 .hl{color:var(--strong);font-weight:600}
 .on .hl{color:var(--spotTxt)}
 .by{display:flex;align-items:center;font-size:18px;font-weight:600;padding-top:14px;margin-top:12px;border-top:1px solid var(--cardBd);color:var(--strong)}
-.short .by{border:0;padding-top:4px;margin-top:10px}
+.short .by .ln{display:none}
+.short .by{white-space:nowrap;border:0;padding-top:4px;margin-top:10px;font-size:16px;justify-content:center;text-align:center}
 .by .ln{width:26px;height:2px;background:var(--accent);margin-left:12px}
 .on .by .ln{background:var(--spot)}
 .bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--grid)}
@@ -151,16 +152,18 @@ var DATA=[
   t:"كان محتوى جيدًا، وأعجبني جدًا أسلوب تقديم الورشة من حيث التنوع في الأساليب مثل [المقاطع المرئية المتفاعلة]، وتنوع أساليب الأنشطة مثل [البطاقات والسيناريوهات التفاعلية]، والتي بدورها [كسرت حاجز الملل] لو كان التقديم كله مقاطع مرئية. [أفكار رائعة وأساليب متنوعة]، مع الشكر والتقدير لكم على توفير هذه الورش في مجال حماية البيانات الشخصية وحوكمة البيانات، وسعيد بتمكني من الاستفادة منها."},
  {n:"جود حمود القرعاني",x:64,y:140,w:474,h:468,
   t:"أحد أهم محركات النجاح التقني هو [الامتثال لحوكمة البيانات وحماية خصوصيتها]. سعدت بإتمام دورة حماية البيانات الشخصية (PDPL) المقدمة من سدايا: [فهم الأطر التنظيمية لنظام حماية البيانات الشخصية]، و[التمييز العملي بين أدوار جهة التحكم وجهة المعالجة]. خطوة جديدة ومعرفة أعمق تسهم في [تعزيز الأمان والامتثال الرقمي]."},
- {n:"محمد بن عمر بن محمد مجلي",x:1186,y:632,w:350,h:228,s:1,
+ {n:"محمد بن عمر بن محمد مجلي",x:1256,y:632,w:280,h:228,s:1,
   t:"دورة تدريبية [فاخرة] و[نقلة معرفية نوعية]. شكرًا لجهودكم."},
- {n:"سلطان محمد حامد القرافي",x:812,y:632,w:350,h:228,s:1,f:20,
+ {n:"سلطان محمد حامد القرافي",x:938,y:632,w:300,h:228,s:1,f:17,
   t:"تجربة المحتوى [جميلة جدًا]، وأتمنى أن تكون هناك [مواد تدريبية لجميع مجالات البيانات الـ14]."},
- {n:"عائده خليف سعد الرشيدي",x:438,y:632,w:350,h:228,s:1,
+ {n:"عائده خليف سعد الرشيدي",x:640,y:632,w:280,h:228,s:1,
   t:"[ألف شكر لجهودكم]، رائع جدًا، جعلها الله [بموازين حسناتكم]."},
- {n:"محمد عبدالله سليمان الحماد",x:64,y:632,w:350,h:228,s:1,
-  t:"جزاكم الله خيرًا، دورة [أكثر من رائعة]."}
+ {n:"محمد عبدالله سليمان الحماد",x:352,y:632,w:270,h:228,s:1,
+  t:"جزاكم الله خيرًا، دورة [أكثر من رائعة]."},
+ {n:"عبدالله بن محمد بن عبدالله الأحمري",x:64,y:632,w:270,h:228,s:1,
+  t:"شكرًا لكم على [الدورة الممتعة]."}
 ];
-var ORDER=[3,0,4,1,5,2,6]; /* spotlight order alternates short and long */
+var ORDER=[3,0,4,1,5,2,6,7]; /* spotlight order alternates short and long */
 function $(id){return document.getElementById(id);}
 function addC(el,c){if(el&&(" "+el.className+" ").indexOf(" "+c+" ")<0)el.className+=" "+c;}
 function remC(el,c){if(el)el.className=(" "+el.className+" ").replace(new RegExp(" "+c+" ","g")," ").replace(/^\s+|\s+$/g,"");}
