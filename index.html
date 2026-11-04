@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="slide-version" content="2026-11-01-14">
+<meta name="slide-version" content="2026-11-01-15">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>آراء المتدربين — دورة حماية البيانات الشخصية</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -71,7 +71,8 @@ canvas#sky{position:absolute;top:0;left:0;width:100%;height:100%}
 .card{position:relative;width:100%;height:100%;border-radius:26px;padding:28px 32px 24px;overflow:hidden;display:flex;flex-direction:column;
   background:linear-gradient(160deg,var(--cardHi),rgba(255,255,255,0));background-color:var(--card);
   border:1px solid var(--cardBd);box-shadow:0 10px 28px var(--shadow);
-  transition:opacity .6s,border-color .6s}
+  transition:opacity .5s,border-color .6s,transform .5s}
+.slot.swap .card{opacity:0!important;transform:translateY(14px)}
 .dim .card{opacity:.82}
 .on .card{border-color:var(--spotBd);border-width:2px}
 .qm{width:40px;height:32px;flex:none;opacity:.9;margin-bottom:12px}
@@ -79,8 +80,8 @@ canvas#sky{position:absolute;top:0;left:0;width:100%;height:100%}
 .on .qm path{fill:var(--spot)}
 
 .txt{flex:1;font-size:19px;line-height:1.76;color:var(--txt)}
-.short .card{justify-content:center;align-items:center;text-align:center;padding:46px 14px 16px}
-.short .txt{flex:none;font-size:18px;line-height:1.5;font-weight:600;color:var(--strong)}
+.short .card{justify-content:center;align-items:center;text-align:center;padding:44px 26px 16px}
+.short .txt{flex:none;font-size:22px;line-height:1.5;font-weight:600;color:var(--strong)}
 .short .qm{position:absolute;top:18px;right:20px;margin:0;width:30px;height:24px}
 .w{display:inline}
 @keyframes win{to{opacity:1;transform:none}}
@@ -88,7 +89,7 @@ canvas#sky{position:absolute;top:0;left:0;width:100%;height:100%}
 .on .hl{color:var(--spotTxt)}
 .by{display:flex;align-items:center;font-size:18px;font-weight:600;padding-top:14px;margin-top:12px;border-top:1px solid var(--cardBd);color:var(--strong)}
 .short .by .ln{display:none}
-.short .by{white-space:nowrap;border:0;padding-top:4px;margin-top:10px;font-size:15px;justify-content:center;text-align:center}
+.short .by{white-space:nowrap;border:0;padding-top:4px;margin-top:10px;font-size:17px;justify-content:center;text-align:center}
 .by .ln{width:26px;height:2px;background:var(--accent);margin-left:12px}
 .on .by .ln{background:var(--spot)}
 .bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--grid)}
@@ -145,27 +146,25 @@ function showErr(){var d=document.getElementById("err");if(!d){d=document.create
 if(/debug/.test(location.search)){setTimeout(function(){errs.push("debug");showErr();},500);}
 
 /* [نص] = عبارة تضيء بالذهبي عند التركيز على البطاقة */
-var DATA=[
+var LONG=[
  {n:"أمل قاسم إسماعيل دراج",x:1062,y:140,w:474,h:468,
   t:"بصراحة من [أمتع الدورات والحقائب التدريبية الإلكترونية] التي تعلمت عليها في حياتي: [وضوح في السردية وطريقة التعلم]، و[تنوع في التطبيقات والأمثلة الواقعية]. مع طول مدة الدورة إلا أنها [متميزة ورائعة]، ولا يمكن أن أصفها بغير هذا الوصف. شكرًا سدايا، لقد أوضحتم لنا ما لم يوضحه النظام ولا اللائحة ولا الدليل الاسترشادي، لكنكم [أبدعتم في هذه الحقيبة]. شكرًا لكم على هذه الاحترافية، شكرًا أكاديمية سدايا."},
  {n:"رائد عبدالرحمن عبدالكريم الديحان",x:563,y:140,w:474,h:468,
   t:"كان محتوى جيدًا، وأعجبني جدًا أسلوب تقديم الورشة من حيث التنوع في الأساليب مثل [المقاطع المرئية المتفاعلة]، وتنوع أساليب الأنشطة مثل [البطاقات والسيناريوهات التفاعلية]، والتي بدورها [كسرت حاجز الملل] لو كان التقديم كله مقاطع مرئية. [أفكار رائعة وأساليب متنوعة]، مع الشكر والتقدير لكم على توفير هذه الورش في مجال حماية البيانات الشخصية وحوكمة البيانات، وسعيد بتمكني من الاستفادة منها."},
  {n:"جود حمود القرعاني",x:64,y:140,w:474,h:468,
-  t:"أحد أهم محركات النجاح التقني هو [الامتثال لحوكمة البيانات وحماية خصوصيتها]. سعدت بإتمام دورة حماية البيانات الشخصية (PDPL) المقدمة من سدايا: [فهم الأطر التنظيمية لنظام حماية البيانات الشخصية]، و[التمييز العملي بين أدوار جهة التحكم وجهة المعالجة]. خطوة جديدة ومعرفة أعمق تسهم في [تعزيز الأمان والامتثال الرقمي]."},
- {n:"محمد بن عمر بن محمد مجلي",x:1304,y:632,w:232,h:228,s:1,
-  t:"دورة تدريبية [فاخرة] و[نقلة معرفية نوعية]. شكرًا لجهودكم."},
- {n:"سلطان محمد حامد القرافي",x:1038,y:632,w:250,h:228,s:1,f:16,
-  t:"تجربة المحتوى [جميلة جدًا]، وأتمنى أن تكون هناك [مواد تدريبية لجميع مجالات البيانات الـ14]."},
- {n:"عائده خليف سعد الرشيدي",x:812,y:632,w:210,h:228,s:1,
-  t:"[ألف شكر لجهودكم]، رائع جدًا، جعلها الله [بموازين حسناتكم]."},
- {n:"محمد عبدالله سليمان الحماد",x:576,y:632,w:220,h:228,s:1,
-  t:"جزاكم الله خيرًا، دورة [أكثر من رائعة]."},
- {n:"عبدالله بن محمد بن عبدالله الأحمري",x:290,y:632,w:270,h:228,s:1,
-  t:"شكرًا لكم على [الدورة الممتعة]."},
- {n:"مهند طلال خرمان العنزي",x:64,y:632,w:210,h:228,s:1,
-  t:"شكرًا لكم [جزيل الشكر]."}
+  t:"أحد أهم محركات النجاح التقني هو [الامتثال لحوكمة البيانات وحماية خصوصيتها]. سعدت بإتمام دورة حماية البيانات الشخصية (PDPL) المقدمة من سدايا: [فهم الأطر التنظيمية لنظام حماية البيانات الشخصية]، و[التمييز العملي بين أدوار جهة التحكم وجهة المعالجة]. خطوة جديدة ومعرفة أعمق تسهم في [تعزيز الأمان والامتثال الرقمي]."}
 ];
-var ORDER=[3,0,4,1,5,2,6,7,8]; /* spotlight order alternates short and long */
+var POOL=[
+ {n:"محمد بن عمر بن محمد مجلي",t:"دورة تدريبية [فاخرة] و[نقلة معرفية نوعية]. شكرًا لجهودكم."},
+ {n:"سلطان محمد حامد القرافي",t:"تجربة المحتوى [جميلة جدًا]، وأتمنى أن تكون هناك [مواد تدريبية لجميع مجالات البيانات الـ14]."},
+ {n:"عائده خليف سعد الرشيدي",t:"[ألف شكر لجهودكم]، رائع جدًا، جعلها الله [بموازين حسناتكم]."},
+ {n:"أحد المتدربين",f:19,t:"كانت [تجربة مثرية قيّمة] أسهمت في [تعزيز فهمي لنظام حماية البيانات الشخصية ولوائحه التنفيذية]، وأُشيد [بالتنوع في تقديم المحتوى] من خلال المقاطع المرئية والأنشطة التفاعلية."},
+ {n:"محمد عبدالله سليمان الحماد",t:"جزاكم الله خيرًا، دورة [أكثر من رائعة]."},
+ {n:"عبدالله بن محمد بن عبدالله الأحمري",t:"شكرًا لكم على [الدورة الممتعة]."},
+ {n:"مهند طلال خرمان العنزي",t:"شكرًا لكم [جزيل الشكر]."}
+];
+var BOT=[{x:1062},{x:563},{x:64}]; /* bottom slots: fixed positions, rotating content */
+var SEQ=["b0","s0","b1","s1","b2","s2"]; /* spotlight order */
 function $(id){return document.getElementById(id);}
 function addC(el,c){if(el&&(" "+el.className+" ").indexOf(" "+c+" ")<0)el.className+=" "+c;}
 function remC(el,c){if(el)el.className=(" "+el.className+" ").replace(new RegExp(" "+c+" ","g")," ").replace(/^\s+|\s+$/g,"");}
@@ -195,27 +194,34 @@ function words(t,base,step){var hl=false,g=-1,out=[],p=t.split(/\s+/);
     if(w.indexOf("]")>-1)hl=false;}
   return out.join(" ");}
 
-var html="";
-for(var i=0;i<DATA.length;i++){var d=DATA[i],delay=300+i*180;
-  html+='<div class="slot'+(d.s?" short":"")+'" id="s'+i+'" style="left:'+d.x+'px;top:'+d.y+'px;width:'+d.w+'px;height:'+d.h+'px;-webkit-animation-delay:'+delay+'ms;animation-delay:'+delay+'ms">'+
-   '<div class="fl" style="-webkit-animation-delay:-'+(i*1.7)+'s;animation-delay:-'+(i*1.7)+'s"><div class="card">'+QM+
-   '<div class="txt"'+(d.f?' style="font-size:'+d.f+'px"':'')+'>'+words(d.t,delay+400,d.s?60:14)+'</div>'+
-   '<div class="by"><span class="ln"></span>'+d.n+'</div><div class="bar"><i></i></div><div class="shine"></div></div></div></div>';}
+function inner(d){return '<div class="card">'+QM+'<div class="txt"'+(d.f?' style="font-size:'+d.f+'px"':'')+'>'+words(d.t,0,0)+'</div>'+
+  '<div class="by"><span class="ln"></span>'+d.n+'</div><div class="bar"><i></i></div></div>';}
+var html="",i;
+for(i=0;i<LONG.length;i++){var d=LONG[i],delay=300+i*180;
+  html+='<div class="slot" id="s'+i+'" style="left:'+d.x+'px;top:'+d.y+'px;width:'+d.w+'px;height:'+d.h+'px;-webkit-animation-delay:'+delay+'ms;animation-delay:'+delay+'ms"><div class="fl">'+inner(d)+'</div></div>';}
+var ptr=0;
+for(i=0;i<BOT.length;i++){var dl=840+i*180;
+  html+='<div class="slot short" id="b'+i+'" style="left:'+BOT[i].x+'px;top:632px;width:474px;height:228px;-webkit-animation-delay:'+dl+'ms;animation-delay:'+dl+'ms"><div class="fl">'+inner(POOL[ptr])+'</div></div>';
+  BOT[i].item=POOL[ptr];ptr=(ptr+1)%POOL.length;}
 $("cards").innerHTML=html;
 
+function swapSlot(k){var el=$("b"+k),fl=el.getElementsByTagName("div")[0];addC(el,"swap");
+  setTimeout(function(){var d=POOL[ptr];ptr=(ptr+1)%POOL.length;BOT[k].item=d;fl.innerHTML=inner(d);
+    if((" "+el.className+" ").indexOf(" dim ")<0)addC(el,"dim");void el.offsetWidth;remC(el,"swap");},550);}
 
 /* spotlight cycle */
 var step=-1,reloadPending=false,startedAt=new Date().getTime();
-function durFor(d){return d.s?6000:Math.min(13000,5000+d.t.split(/\s+/).length*95);}
-function spot(){step=(step+1)%ORDER.length;
+function durFor(d,isShort){return isShort?6500:Math.min(13000,5000+d.t.split(/\s+/).length*95);}
+function spot(){step=(step+1)%SEQ.length;
   if(step===0&&reloadPending){location.reload();return;}
-  var idx=ORDER[step];
-  for(var i=0;i<DATA.length;i++){var el=$("s"+i),b=el.getElementsByTagName("i")[0];
-    if(i===idx){remC(el,"dim");addC(el,"on");}else{remC(el,"on");addC(el,"dim");}
-    setTr(b,"none");setT(b,"scaleX(0)");}
-  var bar=$("s"+idx).getElementsByTagName("i")[0],dur=durFor(DATA[idx]);void bar.offsetWidth;
+  var id=SEQ[step];
+  for(var j=0;j<SEQ.length;j++){var el=$(SEQ[j]),b=el.getElementsByTagName("i")[0];
+    if(SEQ[j]===id){remC(el,"dim");addC(el,"on");}else{remC(el,"on");addC(el,"dim");}
+    if(b){setTr(b,"none");setT(b,"scaleX(0)");}}
+  var isShort=id.charAt(0)==="b",k=+id.charAt(1),d=isShort?BOT[k].item:LONG[k],dur=durFor(d,isShort);
+  var bar=$(id).getElementsByTagName("i")[0];void bar.offsetWidth;
   setTr(bar,"-webkit-transform "+dur+"ms linear, transform "+dur+"ms linear");setT(bar,"scaleX(1)");
-  setTimeout(spot,dur);}
+  setTimeout(function(){if(isShort){remC($(id),"on");swapSlot(k);}spot();},dur);}
 setTimeout(spot,4200);
 
 /* fullscreen, cursor, wake */
