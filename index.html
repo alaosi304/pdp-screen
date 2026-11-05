@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="slide-version" content="2026-11-01-19">
+<meta name="slide-version" content="2026-11-01-20">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>آراء المتدربين — دورة حماية البيانات الشخصية</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -114,6 +114,9 @@ canvas#sky{position:absolute;top:0;left:0;width:100%;height:100%}
 .c .by .ln{width:18px}
 .by{font-size:15px;padding-top:8px;margin-top:8px}
 .slot.swap .card{opacity:0!important}
+.heart{display:inline-block;width:.95em;height:.95em;vertical-align:-.12em;margin:0 .1em}
+.heart path{fill:#e5484d}
+.txt[dir="ltr"]{text-align:right;font-family:"IBM Plex Sans Arabic","Segoe UI",Arial,sans-serif}
 .hint{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);direction:rtl;font-size:13px;color:var(--txt);
   background:var(--card);border:1px solid var(--cardBd);padding:8px 16px;border-radius:999px;transition:opacity .8s;z-index:5}
 body.idle .hint{opacity:0}
@@ -177,7 +180,8 @@ var COLS=[
  [{n:"بدر الحبشي",t:"كانت [تجربة مثرية قيّمة] أسهمت في [تعزيز فهمي لنظام حماية البيانات الشخصية ولوائحه التنفيذية]، وأُشيد [بالتنوع في تقديم المحتوى] من خلال المقاطع المرئية والأنشطة التفاعلية.",g:1},
   {n:"الوليد سعد بن محمد العجيمي",t:"شكرًا لكم على هذه [الدورة الجميلة]، دورة تعليمية [من الطراز الرفيع]."},
   {n:"نوف إبراهيم علي القحطاني",t:"دورة [رائعة جدًا جدًا]، أتمنى تخلون [المواد التعليمية متاحة لنا في المستقبل] وما تحذفونها."},
-  {n:"عبدالله بن محمد بن عبدالله الأحمري",t:"شكرًا لكم على [الدورة الممتعة]."}]
+  {n:"عبدالله بن محمد بن عبدالله الأحمري",t:"شكرًا لكم على [الدورة الممتعة]."},
+  {n:"عهود محمد أحمد العلوي",ltr:1,t:"Wow I’m [so happy] ♥"}]
 ];
 function $(id){return document.getElementById(id);}
 function addC(el,c){if(el&&(" "+el.className+" ").indexOf(" "+c+" ")<0)el.className+=" "+c;}
@@ -208,7 +212,8 @@ function words(t,base,step){var hl=false,g=-1,out=[],p=t.split(/\s+/);
     if(w.indexOf("]")>-1)hl=false;}
   return out.join(" ");}
 
-function inner(d){return '<div class="card'+(d.L?'':' c')+'">'+QM+'<div class="txt">'+words(d.t,0,0)+'</div>'+
+var HEART='<svg class="heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 5.3 3 1.7-1.8 3.2-3 5.3-3 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg>';
+function inner(d){return '<div class="card'+(d.L?'':' c')+'">'+QM+'<div class="txt"'+(d.ltr?' dir="ltr"':'')+'>'+words(d.t,0,0).replace("♥",HEART)+'</div>'+
   '<div class="by"><span class="ln"></span>'+d.n+'</div><div class="bar"><i></i></div></div>';}
 var html="",ALL=[],n=0;
 for(var ci=0;ci<COLS.length;ci++){html+='<div class="col">';
