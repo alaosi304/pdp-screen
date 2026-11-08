@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="slide-version" content="2026-11-01-22">
+<meta name="slide-version" content="2026-11-01-23">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>آراء المتدربين — دورة حماية البيانات الشخصية</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,24 +12,24 @@
 :root{color-scheme:dark;
   --bg:#070f2b;--bgA:#0d1b4b;--bgB:#081233;--bgC:#040a1e;
   --ink:#f4f7fd;--txt:#d5def0;--strong:#ffffff;--mute:#9fb0cf;
-  --card:rgba(16,30,78,.7);--cardHi:rgba(255,255,255,.06);--cardBd:rgba(140,170,255,.16);--shadow:rgba(0,0,0,.4);
+  --card:rgba(15,28,74,.9);--cardHi:rgba(255,255,255,.06);--cardBd:rgba(140,170,255,.16);--shadow:rgba(0,0,0,.4);
   --accent:#45d6a8;--qm:#45d6a8;--sep:rgba(255,255,255,.2);--grid:rgba(255,255,255,.03);
   --spot:#f2c46d;--spotTxt:#f6d48c;--spotBd:rgba(242,196,109,.7);--spotGlow:rgba(242,196,109,.22);
   --g1:#1d4fb0;--g2:#14866a;--g3:#3b2f9a;--gOp:1;--vign:rgba(2,5,16,.6);--star:190,225,255;
   --deptA:#1b8f6c;--deptB:#1d4fb0;
-  --bgtx:rgba(255,255,255,.07);--bgtx2:rgba(242,196,109,.09);--bgdot:rgba(69,214,168,.25);
+  --mini:rgba(255,255,255,.045);--miniBd:rgba(160,190,255,.12);--miniTxt:rgba(214,226,248,.42);--miniName:rgba(242,196,109,.45);--fadeC:rgba(7,15,43,.15);--fadeE:rgba(7,15,43,.55);
   box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#070f2b}}
 :root[data-theme="dark"]{--bg:#070f2b}
 html.light{color-scheme:light;
   --bg:#f2f5fb;--bgA:#ffffff;--bgB:#f2f5fb;--bgC:#e3eaf5;
   --ink:#0b1840;--txt:#2e3b5c;--strong:#0b1840;--mute:#5b6a8c;
-  --card:rgba(255,255,255,.84);--cardHi:rgba(255,255,255,0);--cardBd:#e2e8f3;--shadow:rgba(20,40,90,.10);
+  --card:rgba(255,255,255,.94);--cardHi:rgba(255,255,255,0);--cardBd:#e2e8f3;--shadow:rgba(20,40,90,.10);
   --accent:#1f9a74;--qm:#1f9a74;--sep:rgba(11,24,64,.16);--grid:rgba(11,24,64,.045);
   --spot:#c98a1a;--spotTxt:#a86d06;--spotBd:rgba(201,138,26,.7);--spotGlow:rgba(201,138,26,.16);
   --g1:#7ea6ff;--g2:#7fe0c2;--g3:#b9a8ff;--gOp:.35;--vign:rgba(120,145,190,.16);--star:40,90,170;
   --deptA:#1b8f6c;--deptB:#1d4fb0;
-  --bgtx:rgba(11,24,64,.06);--bgtx2:rgba(201,138,26,.1);--bgdot:rgba(31,154,116,.3)}
+  --mini:rgba(255,255,255,.55);--miniBd:rgba(11,24,64,.08);--miniTxt:rgba(46,59,92,.45);--miniName:rgba(168,109,6,.5);--fadeC:rgba(242,245,251,.1);--fadeE:rgba(242,245,251,.55)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;background:var(--bg);overflow:hidden}
 body{font-family:"IBM Plex Sans Arabic",Tahoma,"Segoe UI",Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
@@ -120,18 +120,24 @@ canvas#sky{position:absolute;top:0;left:0;width:100%;height:100%}
 .heart path{fill:#e5484d}
 .txt[dir="ltr"]{text-align:right;font-family:"IBM Plex Sans Arabic","Segoe UI",Arial,sans-serif}
 
-/* moving background of all comments */
+/* background: tilted mosaic of all comments drifting */
 .bgtx{position:absolute;top:0;right:0;bottom:0;left:0;overflow:hidden;pointer-events:none}
-.bgrow{position:absolute;left:0;white-space:nowrap;font-weight:700;line-height:1;font-size:8.5vh;color:var(--bgtx)}
-.bgrow.alt{color:var(--bgtx2);font-size:6vh;font-weight:600}
-.bgtrack{display:inline-block;-webkit-animation:bgl 140s linear infinite;animation:bgl 140s linear infinite}
-.bgrow.rev .bgtrack{-webkit-animation-name:bgr;animation-name:bgr}
-.bgtrack span{display:inline-block;direction:rtl;padding:0 3vh}
-.bgtrack i{display:inline-block;width:1.4vh;height:1.4vh;border-radius:50%;background:var(--bgdot);vertical-align:middle;margin:0 2vh}
-@-webkit-keyframes bgl{from{-webkit-transform:translateX(0)}to{-webkit-transform:translateX(-50%)}}
-@keyframes bgl{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@-webkit-keyframes bgr{from{-webkit-transform:translateX(-50%)}to{-webkit-transform:translateX(0)}}
-@keyframes bgr{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.mosaic{position:absolute;top:-35%;left:-12%;width:124%;height:170%;display:flex;justify-content:center;
+  -webkit-transform:rotate(-9deg);transform:rotate(-9deg)}
+.mcol{width:250px;margin:0 11px;flex:none;overflow:hidden}
+.mtrack{-webkit-animation:mup 150s linear infinite;animation:mup 150s linear infinite}
+.mcol.dn .mtrack{-webkit-animation-name:mdn;animation-name:mdn}
+@-webkit-keyframes mup{from{-webkit-transform:translateY(0)}to{-webkit-transform:translateY(-50%)}}
+@keyframes mup{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+@-webkit-keyframes mdn{from{-webkit-transform:translateY(-50%)}to{-webkit-transform:translateY(0)}}
+@keyframes mdn{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+.mini{direction:rtl;margin-bottom:22px;border-radius:18px;padding:16px 18px 14px;background:var(--mini);border:1px solid var(--miniBd)}
+.mini q{display:block;quotes:none;font-size:14px;line-height:1.7;color:var(--miniTxt);overflow:hidden;max-height:95px}
+.mini q:before,.mini q:after{content:none}
+.mini b{display:block;margin-top:8px;font-size:12px;font-weight:600;color:var(--miniName)}
+.mini svg{width:16px;height:13px;margin-bottom:6px;display:block}
+.mini svg path{fill:var(--miniName)}
+.bgfade{position:absolute;top:0;right:0;bottom:0;left:0;pointer-events:none;background:radial-gradient(ellipse at 50% 55%,var(--fadeC) 0%,var(--fadeE) 75%)}
 .bar{display:none}
 .hint{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);direction:rtl;font-size:13px;color:var(--txt);
   background:var(--card);border:1px solid var(--cardBd);padding:8px 16px;border-radius:999px;transition:opacity .8s;z-index:5}
@@ -155,6 +161,7 @@ body.idle .hint{opacity:0}
   <div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
   <div class="grid"></div>
   <div class="bgtx" id="bgtx"></div>
+  <div class="bgfade"></div>
   <div class="vign"></div>
   <div class="stage" id="stage">
     <header class="top">
@@ -255,20 +262,16 @@ function spot(){step=(step+1)%SEQ.length;
   setTr(bar,"-webkit-transform "+dur+"ms linear, transform "+dur+"ms linear");setT(bar,"scaleX(1)");
   setTimeout(spot,dur);}
 /* spotlight removed */
-/* background rows: key phrases + full comments, drifting slowly */
-(function(){var phr=[],full=[];
-  for(var a=0;a<COLS.length;a++)for(var b=0;b<COLS[a].length;b++){var t=COLS[a][b].t,m=t.match(/\[[^\]]+\]/g)||[];
-    for(var q=0;q<m.length;q++)phr.push(m[q].replace(/[\[\]]/g,""));
-    full.push(t.replace(/[\[\]]/g,"").replace("♥",""));}
-  function chunk(list,start,n){var o=[];for(var k=0;k<n;k++)o.push(list[(start+k)%list.length]);return o;}
-  var rows=[{top:2,alt:0,src:phr,st:0},{top:17,alt:1,src:full,st:0},{top:30,alt:0,src:phr,st:7},{top:45,alt:1,src:full,st:5},
-            {top:58,alt:0,src:phr,st:14},{top:73,alt:1,src:full,st:10},{top:86,alt:0,src:phr,st:21}];
-  var h="";
-  for(var r=0;r<rows.length;r++){var R=rows[r],items=chunk(R.src,R.st,R.alt?4:7),seg="";
-    for(var k=0;k<items.length;k++)seg+='<span>'+items[k]+'</span><i></i>';
-    var dur=R.alt?220:(150+r*12);
-    h+='<div class="bgrow'+(R.alt?' alt':'')+(r%2?' rev':'')+'" style="top:'+R.top+'%"><div class="bgtrack" style="-webkit-animation-duration:'+dur+'s;animation-duration:'+dur+'s;-webkit-animation-delay:-'+(r*17)+'s;animation-delay:-'+(r*17)+'s">'+seg+seg+'</div></div>';}
-  $("bgtx").innerHTML=h;})();
+/* background mosaic: every comment as a ghost card, columns drifting in opposite directions */
+(function(){var all=[];for(var a=0;a<COLS.length;a++)for(var b=0;b<COLS[a].length;b++)all.push(COLS[a][b]);
+  var QS='<svg viewBox="0 0 100 80"><path d="M0 80V48C0 22 14 6 40 0l5 10C30 15 23 25 22 38h20v42H0zm56 0V48C56 22 70 6 96 0l4 10c-15 5-22 15-23 28h20v42H56z"/></svg>';
+  var h='<div class="mosaic">',per=8;
+  for(var c=0;c<8;c++){var seg="";
+    for(var k=0;k<per;k++){var d=all[(c*5+k*3)%all.length];
+      seg+='<div class="mini">'+QS+'<q'+(d.ltr?' dir="ltr"':'')+'>'+d.t.replace(/[\[\]]/g,"").replace("♥","")+'</q><b>'+d.n+'</b></div>';}
+    var dur=130+(c%3)*25;
+    h+='<div class="mcol'+(c%2?' dn':'')+'"><div class="mtrack" style="-webkit-animation-duration:'+dur+'s;animation-duration:'+dur+'s;-webkit-animation-delay:-'+(c*19)+'s;animation-delay:-'+(c*19)+'s">'+seg+seg+'</div></div>';}
+  $("bgtx").innerHTML=h+'</div>';})();
 
 
 /* fullscreen, cursor, wake */
