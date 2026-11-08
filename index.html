@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="slide-version" content="2026-11-01-21">
+<meta name="slide-version" content="2026-11-01-22">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>آراء المتدربين — دورة حماية البيانات الشخصية</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,22 +12,24 @@
 :root{color-scheme:dark;
   --bg:#070f2b;--bgA:#0d1b4b;--bgB:#081233;--bgC:#040a1e;
   --ink:#f4f7fd;--txt:#d5def0;--strong:#ffffff;--mute:#9fb0cf;
-  --card:rgba(16,30,78,.78);--cardHi:rgba(255,255,255,.06);--cardBd:rgba(140,170,255,.16);--shadow:rgba(0,0,0,.4);
+  --card:rgba(16,30,78,.7);--cardHi:rgba(255,255,255,.06);--cardBd:rgba(140,170,255,.16);--shadow:rgba(0,0,0,.4);
   --accent:#45d6a8;--qm:#45d6a8;--sep:rgba(255,255,255,.2);--grid:rgba(255,255,255,.03);
   --spot:#f2c46d;--spotTxt:#f6d48c;--spotBd:rgba(242,196,109,.7);--spotGlow:rgba(242,196,109,.22);
   --g1:#1d4fb0;--g2:#14866a;--g3:#3b2f9a;--gOp:1;--vign:rgba(2,5,16,.6);--star:190,225,255;
   --deptA:#1b8f6c;--deptB:#1d4fb0;
+  --bgtx:rgba(255,255,255,.07);--bgtx2:rgba(242,196,109,.09);--bgdot:rgba(69,214,168,.25);
   box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#070f2b}}
 :root[data-theme="dark"]{--bg:#070f2b}
 html.light{color-scheme:light;
   --bg:#f2f5fb;--bgA:#ffffff;--bgB:#f2f5fb;--bgC:#e3eaf5;
   --ink:#0b1840;--txt:#2e3b5c;--strong:#0b1840;--mute:#5b6a8c;
-  --card:#ffffff;--cardHi:rgba(255,255,255,0);--cardBd:#e2e8f3;--shadow:rgba(20,40,90,.10);
+  --card:rgba(255,255,255,.84);--cardHi:rgba(255,255,255,0);--cardBd:#e2e8f3;--shadow:rgba(20,40,90,.10);
   --accent:#1f9a74;--qm:#1f9a74;--sep:rgba(11,24,64,.16);--grid:rgba(11,24,64,.045);
   --spot:#c98a1a;--spotTxt:#a86d06;--spotBd:rgba(201,138,26,.7);--spotGlow:rgba(201,138,26,.16);
   --g1:#7ea6ff;--g2:#7fe0c2;--g3:#b9a8ff;--gOp:.35;--vign:rgba(120,145,190,.16);--star:40,90,170;
-  --deptA:#1b8f6c;--deptB:#1d4fb0}
+  --deptA:#1b8f6c;--deptB:#1d4fb0;
+  --bgtx:rgba(11,24,64,.06);--bgtx2:rgba(201,138,26,.1);--bgdot:rgba(31,154,116,.3)}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;background:var(--bg);overflow:hidden}
 body{font-family:"IBM Plex Sans Arabic",Tahoma,"Segoe UI",Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
@@ -117,6 +119,20 @@ canvas#sky{position:absolute;top:0;left:0;width:100%;height:100%}
 .heart{display:inline-block;width:.95em;height:.95em;vertical-align:-.12em;margin:0 .1em}
 .heart path{fill:#e5484d}
 .txt[dir="ltr"]{text-align:right;font-family:"IBM Plex Sans Arabic","Segoe UI",Arial,sans-serif}
+
+/* moving background of all comments */
+.bgtx{position:absolute;top:0;right:0;bottom:0;left:0;overflow:hidden;pointer-events:none}
+.bgrow{position:absolute;left:0;white-space:nowrap;font-weight:700;line-height:1;font-size:8.5vh;color:var(--bgtx)}
+.bgrow.alt{color:var(--bgtx2);font-size:6vh;font-weight:600}
+.bgtrack{display:inline-block;-webkit-animation:bgl 140s linear infinite;animation:bgl 140s linear infinite}
+.bgrow.rev .bgtrack{-webkit-animation-name:bgr;animation-name:bgr}
+.bgtrack span{display:inline-block;direction:rtl;padding:0 3vh}
+.bgtrack i{display:inline-block;width:1.4vh;height:1.4vh;border-radius:50%;background:var(--bgdot);vertical-align:middle;margin:0 2vh}
+@-webkit-keyframes bgl{from{-webkit-transform:translateX(0)}to{-webkit-transform:translateX(-50%)}}
+@keyframes bgl{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@-webkit-keyframes bgr{from{-webkit-transform:translateX(-50%)}to{-webkit-transform:translateX(0)}}
+@keyframes bgr{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.bar{display:none}
 .hint{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);direction:rtl;font-size:13px;color:var(--txt);
   background:var(--card);border:1px solid var(--cardBd);padding:8px 16px;border-radius:999px;transition:opacity .8s;z-index:5}
 body.idle .hint{opacity:0}
@@ -138,6 +154,7 @@ body.idle .hint{opacity:0}
 <div class="vp" id="vp">
   <div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
   <div class="grid"></div>
+  <div class="bgtx" id="bgtx"></div>
   <div class="vign"></div>
   <div class="stage" id="stage">
     <header class="top">
@@ -237,7 +254,22 @@ function spot(){step=(step+1)%SEQ.length;
   var bar=$(cur.id).getElementsByTagName("i")[0],dur=durFor(cur);void bar.offsetWidth;
   setTr(bar,"-webkit-transform "+dur+"ms linear, transform "+dur+"ms linear");setT(bar,"scaleX(1)");
   setTimeout(spot,dur);}
-setTimeout(spot,3500);
+/* spotlight removed */
+/* background rows: key phrases + full comments, drifting slowly */
+(function(){var phr=[],full=[];
+  for(var a=0;a<COLS.length;a++)for(var b=0;b<COLS[a].length;b++){var t=COLS[a][b].t,m=t.match(/\[[^\]]+\]/g)||[];
+    for(var q=0;q<m.length;q++)phr.push(m[q].replace(/[\[\]]/g,""));
+    full.push(t.replace(/[\[\]]/g,"").replace("♥",""));}
+  function chunk(list,start,n){var o=[];for(var k=0;k<n;k++)o.push(list[(start+k)%list.length]);return o;}
+  var rows=[{top:2,alt:0,src:phr,st:0},{top:17,alt:1,src:full,st:0},{top:30,alt:0,src:phr,st:7},{top:45,alt:1,src:full,st:5},
+            {top:58,alt:0,src:phr,st:14},{top:73,alt:1,src:full,st:10},{top:86,alt:0,src:phr,st:21}];
+  var h="";
+  for(var r=0;r<rows.length;r++){var R=rows[r],items=chunk(R.src,R.st,R.alt?4:7),seg="";
+    for(var k=0;k<items.length;k++)seg+='<span>'+items[k]+'</span><i></i>';
+    var dur=R.alt?220:(150+r*12);
+    h+='<div class="bgrow'+(R.alt?' alt':'')+(r%2?' rev':'')+'" style="top:'+R.top+'%"><div class="bgtrack" style="-webkit-animation-duration:'+dur+'s;animation-duration:'+dur+'s;-webkit-animation-delay:-'+(r*17)+'s;animation-delay:-'+(r*17)+'s">'+seg+seg+'</div></div>';}
+  $("bgtx").innerHTML=h;})();
+
 
 /* fullscreen, cursor, wake */
 function toggleFS(){var d=document,el=d.documentElement;try{
@@ -252,6 +284,7 @@ var myVer=(document.querySelector('meta[name="slide-version"]')||{}).content;
 function checkUpdate(){try{var x=new XMLHttpRequest();x.open("GET",location.pathname+"?v="+new Date().getTime(),true);
   x.onload=function(){var m=/name="slide-version" content="([^"]+)"/.exec(x.responseText||"");if(x.status==200&&m&&m[1]!==myVer)reloadPending=true;};x.send();}catch(e){}}
 setInterval(checkUpdate,180000);
+setInterval(function(){if(reloadPending)location.reload();},60000);
 setInterval(function(){if(new Date().getTime()-startedAt>6*3600000)reloadPending=true;},600000);
 })();
 </script>
