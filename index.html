@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="slide-version" content="2026-11-01-23">
+<meta name="slide-version" content="2026-11-01-24">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>آراء المتدربين — دورة حماية البيانات الشخصية</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -139,6 +139,12 @@ canvas#sky{position:absolute;top:0;left:0;width:100%;height:100%}
 .mini svg path{fill:var(--miniName)}
 .bgfade{position:absolute;top:0;right:0;bottom:0;left:0;pointer-events:none;background:radial-gradient(ellipse at 50% 55%,var(--fadeC) 0%,var(--fadeE) 75%)}
 .bar{display:none}
+
+.slot.rot{height:178px;flex:none}
+.slot.rot .card{justify-content:center}
+.slot.rot .card{-webkit-transition:opacity .6s;transition:opacity .6s}
+.slot.rot.swap .card{opacity:0}
+.c .txt{font-size:20px}
 .hint{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);direction:rtl;font-size:13px;color:var(--txt);
   background:var(--card);border:1px solid var(--cardBd);padding:8px 16px;border-radius:999px;transition:opacity .8s;z-index:5}
 body.idle .hint{opacity:0}
@@ -197,7 +203,8 @@ var COLS=[
  [{n:"رائد عبدالرحمن عبدالكريم الديحان",t:"كان محتوى جيدًا، وأعجبني جدًا أسلوب تقديم الورشة من حيث التنوع في الأساليب مثل [المقاطع المرئية المتفاعلة]، وتنوع أساليب الأنشطة مثل [البطاقات والسيناريوهات التفاعلية]، والتي بدورها [كسرت حاجز الملل] لو كان التقديم كله مقاطع مرئية. [أفكار رائعة وأساليب متنوعة]، مع الشكر والتقدير لكم على توفير هذه الورش في مجال حماية البيانات الشخصية وحوكمة البيانات، وسعيد بتمكني من الاستفادة منها.",L:1,g:1},
   {n:"سلطان محمد حامد القرافي",t:"تجربة المحتوى [جميلة جدًا]، وأتمنى أن تكون هناك [مواد تدريبية لجميع مجالات البيانات الـ14]."},
   {n:"أسامه منصور عثمان الخالدي",t:"الدورة [رائعة]، [شكرًا من الأعماق]."},
-  {n:"محمد هادي محمد آل طوق",t:"كانت [دورة ممتعة وغنية بالمعلومات المفيدة]، ولكم جزيل الشكر."}],
+  {n:"محمد هادي محمد آل طوق",t:"كانت [دورة ممتعة وغنية بالمعلومات المفيدة]، ولكم جزيل الشكر."},
+  {n:"عبدالسلام محمد مطلق العتيبي",t:"نشكر لكم تعاونكم على هذه [الدورة المتكاملة]، حيث [غطّت جميع المتطلبات في النظام]، وأيضًا الممارسات التي كانت غائبة بشكل عام."}],
  [{n:"جود حمود القرعاني",t:"أحد أهم محركات النجاح التقني هو [الامتثال لحوكمة البيانات وحماية خصوصيتها]. سعدت بإتمام دورة حماية البيانات الشخصية (PDPL) المقدمة من سدايا: [فهم الأطر التنظيمية لنظام حماية البيانات الشخصية]، و[التمييز العملي بين أدوار جهة التحكم وجهة المعالجة]. خطوة جديدة ومعرفة أعمق تسهم في [تعزيز الأمان والامتثال الرقمي].",L:1,g:1},
   {n:"عائده خليف سعد الرشيدي",t:"[ألف شكر لجهودكم]، رائع جدًا، جعلها الله [بموازين حسناتكم]."},
   {n:"مهند طلال خرمان العنزي",t:"شكرًا لكم [جزيل الشكر]."},
@@ -241,26 +248,30 @@ function words(t,base,step){var hl=false,g=-1,out=[],p=t.split(/\s+/);
 var HEART='<svg class="heart" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 5.3 3 1.7-1.8 3.2-3 5.3-3 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg>';
 function inner(d){return '<div class="card'+(d.L?'':' c')+'">'+QM+'<div class="txt"'+(d.ltr?' dir="ltr"':'')+'>'+words(d.t,0,0).replace("♥",HEART)+'</div>'+
   '<div class="by"><span class="ln"></span>'+d.n+'</div><div class="bar"><i></i></div></div>';}
-var html="",ALL=[],n=0;
-for(var ci=0;ci<COLS.length;ci++){html+='<div class="col">';
-  for(var k=0;k<COLS[ci].length;k++){var d=COLS[ci][k],dl=250+(k*4+ci)*120;d.id="s"+n;ALL.push(d);n++;
-    html+='<div class="slot'+(d.g?' grow':'')+'" id="'+d.id+'" style="-webkit-animation-delay:'+dl+'ms;animation-delay:'+dl+'ms">'+inner(d)+'</div>';}
+var FIX=[],POOL=[];
+for(var ci=0;ci<COLS.length;ci++)for(var k=0;k<COLS[ci].length;k++){if(k===0)FIX.push(COLS[ci][k]);else POOL.push(COLS[ci][k]);}
+/* each column: one fixed long comment + two rotating short-comment slots */
+var html="",ROT=[],qi=0,PER=2;
+for(var c=0;c<FIX.length;c++){var dl=250+c*120;
+  html+='<div class="col"><div class="slot grow" style="-webkit-animation-delay:'+dl+'ms;animation-delay:'+dl+'ms">'+inner(FIX[c])+'</div>';
+  for(var r=0;r<PER;r++){var id="r"+c+"_"+r,d2=dl+(r+1)*240;
+    html+='<div class="slot rot" id="'+id+'" style="-webkit-animation-delay:'+d2+'ms;animation-delay:'+d2+'ms">'+inner(POOL[qi])+'</div>';
+    ROT.push({id:id,item:POOL[qi]});qi++;}
   html+='</div>';}
 $("cards").innerHTML=html;
-/* spotlight order: interleave one long card then short ones, column by column */
-var SEQ=[];for(var r=0;r<6;r++)for(var c2=0;c2<COLS.length;c2++)if(COLS[c2][r])SEQ.push(COLS[c2][r]);
+var WAIT=POOL.slice(qi);
+function fitCard(slot){var card=slot.getElementsByTagName("div")[0],t=slot.querySelector(".txt"),fs=20;
+  t.style.fontSize=fs+"px";while(card.scrollHeight>card.clientHeight+1&&fs>15){fs--;t.style.fontSize=fs+"px";}}
+for(var z=0;z<ROT.length;z++)fitCard($(ROT[z].id));
+setTimeout(function(){for(var z=0;z<ROT.length;z++)fitCard($(ROT[z].id));},1500); /* after web font loads */
 
-var step=-1,reloadPending=false,startedAt=new Date().getTime();
-function durFor(d){return d.L?Math.min(12000,4500+d.t.split(/\s+/).length*90):5000;}
-function spot(){step=(step+1)%SEQ.length;
-  if(step===0&&reloadPending){location.reload();return;}
-  var cur=SEQ[step];
-  for(var j=0;j<ALL.length;j++){var el=$(ALL[j].id),b=el.getElementsByTagName("i")[0];
-    if(ALL[j]===cur){remC(el,"dim");addC(el,"on");}else{remC(el,"on");addC(el,"dim");}
-    setTr(b,"none");setT(b,"scaleX(0)");}
-  var bar=$(cur.id).getElementsByTagName("i")[0],dur=durFor(cur);void bar.offsetWidth;
-  setTr(bar,"-webkit-transform "+dur+"ms linear, transform "+dur+"ms linear");setT(bar,"scaleX(1)");
-  setTimeout(spot,dur);}
+/* rotation: every few seconds one slot fades out and takes the next waiting comment */
+var reloadPending=false,startedAt=new Date().getTime(),turn=0,ORDER=[0,3,5,6,1,2,4,7];
+function rotate(){if(!WAIT.length)return;
+  var R=ROT[ORDER[turn%ORDER.length]];turn++;var el=$(R.id);addC(el,"swap");
+  setTimeout(function(){WAIT.push(R.item);R.item=WAIT.shift();el.innerHTML=inner(R.item);fitCard(el);void el.offsetWidth;remC(el,"swap");},600);}
+setInterval(rotate,7000);
+
 /* spotlight removed */
 /* background mosaic: every comment as a ghost card, columns drifting in opposite directions */
 (function(){var all=[];for(var a=0;a<COLS.length;a++)for(var b=0;b<COLS[a].length;b++)all.push(COLS[a][b]);
