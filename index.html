@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="slide-version" content="2026-11-01-26">
+<meta name="slide-version" content="2026-11-01-27">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>آراء المتدربين — دورة حماية البيانات الشخصية</title>
 <style>
@@ -109,8 +109,28 @@ body.idle{cursor:none}
 .card:before{content:"";position:absolute;top:0;right:0;bottom:0;width:3px;background:var(--c);box-shadow:0 0 14px var(--c)}
 .card:after{content:"";position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:var(--c);opacity:.07;pointer-events:none}
 .grow .card{justify-content:space-between}
-.rot .card{justify-content:center;-webkit-transition:opacity .6s;transition:opacity .6s}
-.rot.swap .card{opacity:0}
+.rot .card{justify-content:center}
+/* professional swap: content exits upward, accent bar retracts, new content rises in sequence with a light sweep */
+.card:before{-webkit-transform-origin:50% 0;transform-origin:50% 0}
+.rot.out .qm,.rot.out .txt,.rot.out .by{opacity:0;-webkit-transform:translateY(-14px);transform:translateY(-14px);
+  -webkit-transition:opacity .38s ease,-webkit-transform .45s cubic-bezier(.7,0,.84,0);transition:opacity .38s ease,transform .45s cubic-bezier(.7,0,.84,0)}
+.rot.out .txt{-webkit-transition-delay:.05s;transition-delay:.05s}
+.rot.out .by{-webkit-transition-delay:.1s;transition-delay:.1s}
+.rot.out .card:before{-webkit-transform:scaleY(0);transform:scaleY(0);-webkit-transition:-webkit-transform .45s cubic-bezier(.7,0,.84,0);transition:transform .45s cubic-bezier(.7,0,.84,0)}
+.card.in .qm,.card.in .txt,.card.in .by{-webkit-animation:cin .75s cubic-bezier(.16,1,.3,1) both;animation:cin .75s cubic-bezier(.16,1,.3,1) both}
+.card.in .txt{-webkit-animation-delay:.12s;animation-delay:.12s}
+.card.in .by{-webkit-animation-delay:.26s;animation-delay:.26s}
+.card.in:before{-webkit-transform-origin:50% 100%;transform-origin:50% 100%;-webkit-animation:bar .7s cubic-bezier(.16,1,.3,1) both;animation:bar .7s cubic-bezier(.16,1,.3,1) both}
+@-webkit-keyframes cin{from{opacity:0;-webkit-transform:translateY(18px)}to{opacity:1;-webkit-transform:none}}
+@keyframes cin{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@-webkit-keyframes bar{from{-webkit-transform:scaleY(0)}to{-webkit-transform:none}}
+@keyframes bar{from{transform:scaleY(0)}to{transform:none}}
+.sweep{position:absolute;top:0;bottom:0;right:-140px;width:140px;pointer-events:none;
+  background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.07) 50%,rgba(255,255,255,0));
+  -webkit-animation:swp 1.1s cubic-bezier(.45,0,.2,1) .05s both;animation:swp 1.1s cubic-bezier(.45,0,.2,1) .05s both}
+.light .sweep{background:linear-gradient(90deg,rgba(11,24,64,0),rgba(11,24,64,.05) 50%,rgba(11,24,64,0))}
+@-webkit-keyframes swp{from{-webkit-transform:translateX(0)}to{-webkit-transform:translateX(-640px)}}
+@keyframes swp{from{transform:translateX(0)}to{transform:translateX(-640px)}}
 .qm{width:28px;height:22px;flex:none;margin-bottom:6px}
 .qm path{fill:var(--c)}
 .c .qm{width:20px;height:16px;margin-bottom:4px}
@@ -248,8 +268,12 @@ setTimeout(function(){for(var z=0;z<ROT.length;z++)fitCard($(ROT[z].id));},1500)
 /* rotation: every few seconds one slot fades out and takes the next waiting comment */
 var reloadPending=false,startedAt=new Date().getTime(),turn=0,ORDER=[0,3,5,6,1,2,4,7];
 function rotate(){if(!WAIT.length)return;
-  var R=ROT[ORDER[turn%ORDER.length]];turn++;var el=$(R.id);addC(el,"swap");
-  setTimeout(function(){WAIT.push(R.item);R.item=WAIT.shift();el.innerHTML=inner(R.item);fitCard(el);void el.offsetWidth;remC(el,"swap");},600);}
+  var R=ROT[ORDER[turn%ORDER.length]];turn++;var el=$(R.id);addC(el,"out");
+  setTimeout(function(){WAIT.push(R.item);R.item=WAIT.shift();
+    el.innerHTML=inner(R.item).replace('class="card','class="card in');
+    var cd=el.getElementsByTagName("div")[0],sw=document.createElement("i");sw.className="sweep";cd.appendChild(sw);
+    fitCard(el);remC(el,"out");
+    setTimeout(function(){if(sw.parentNode)sw.parentNode.removeChild(sw);remC(cd,"in");},1400);},520);}
 setInterval(rotate,7000);
 
 /* spotlight removed */
